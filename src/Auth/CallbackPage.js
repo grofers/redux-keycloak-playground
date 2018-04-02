@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { CallbackComponent } from "redux-oidc";
+import jwt_decode from 'jwt-decode';
 import userManager from "./userManager";
 
 class CallbackPage extends React.Component {
@@ -11,7 +12,7 @@ class CallbackPage extends React.Component {
     return (
       <CallbackComponent
         userManager={userManager}
-        successCallback={() => console.log("Success")}
+        successCallback={(user) => console.log(jwt_decode(user.access_token))}
         errorCallback={() => console.log("Error") }
       >
         <div>Redirecting...</div>
