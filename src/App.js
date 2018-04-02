@@ -5,7 +5,8 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 import './App.css';
 import { CounterList } from './CounterList/containers';
-import LoginPage from './Auth/LoginPage'
+import LoginPage from './Auth/LoginPage';
+import CallbackPage from './Auth/CallbackPage';
 import store from './store';
 import userManager from './Auth/userManager';
 
@@ -19,6 +20,7 @@ class App extends Component {
               <div className="App">
                 <Route path='/login' component={LoginPage} />
                 <Route path='/counter' component={CounterList} />
+                <Route path='/callback' component={CallbackPage} />
               </div>
             </Router>
         </OidcProvider>
