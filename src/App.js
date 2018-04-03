@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 import './App.css';
 import { CounterList } from './CounterList/containers';
+import { HomePage } from './HomePage/containers';
 import LoginPage from './Auth/LoginPage';
 import CallbackPage from './Auth/CallbackPage';
 import store from './store';
@@ -18,9 +19,10 @@ class App extends Component {
         <OidcProvider store={store} userManager={userManager}>
             <Router>
               <div className="App">
-                <Route path='/login' component={LoginPage} />
-                <Route path='/counter' component={CounterList} />
-                <Route path='/callback' component={CallbackPage} />
+                <Route exact path='/' component={HomePage} />
+                <Route exact path='/login' component={LoginPage} />
+                <Route exact path='/counter' component={CounterList} />
+                <Route exact path='/callback' component={CallbackPage} />
               </div>
             </Router>
         </OidcProvider>

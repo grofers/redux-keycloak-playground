@@ -1,11 +1,14 @@
 import { createStore, applyMiddleware, compose, combineReducers} from 'redux';
 import { logger } from 'redux-logger';
+
+/* Auth Related modules */
 import { loadUser } from 'redux-oidc';
-import { reducer as oidcReducer } from 'redux-oidc';
+import { oidcReducer } from './Auth/reducers';
+import userManager from './Auth/userManager';
+/* Auth Related modules */
 
 import { countersReducer } from './CounterList/reducers';
 
-import userManager from './Auth/userManager';
 
 const appReducer = combineReducers({
     counters: countersReducer,

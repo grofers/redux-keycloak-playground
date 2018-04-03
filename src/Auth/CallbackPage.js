@@ -15,7 +15,7 @@ class CallbackPage extends React.Component {
         successCallback={(user) => console.log(jwt_decode(user.access_token))}
         errorCallback={() => console.log("Error") }
       >
-        <div>Redirecting...</div>
+        <div>Something...</div>
       </CallbackComponent>
     );
   }
