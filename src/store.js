@@ -7,20 +7,32 @@ import { oidcReducer } from './Auth/reducers';
 import userManager from './Auth/userManager';
 /* Auth Related modules */
 
+/* Router Related */
+import createHistory from 'history/createBrowserHistory';
+import {routerReducer, routerMiddleware } from 'react-router-redux';
+
+/* Router Related */
 import { countersReducer } from './CounterList/reducers';
 
 
+export const history = createHistory()
+const routingMiddleware = routerMiddleware(history)
 const appReducer = combineReducers({
     counters: countersReducer,
-    oidc: oidcReducer
+    oidc: oidcReducer,
+    router: routerReducer,
   });
 
+const middlewares  = [
+  routingMiddleware,
+  logger
+]
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(appReducer,
                                  {},
                                  composeEnhancers(
-                                   applyMiddleware(logger))
+                                   applyMiddleware(...middlewares))
                                  );
 loadUser(store, userManager);
 

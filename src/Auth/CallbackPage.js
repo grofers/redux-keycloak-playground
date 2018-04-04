@@ -1,24 +1,27 @@
 import React from "react";
 import { connect } from "react-redux";
+import { push } from "react-router-redux";
 import { CallbackComponent } from "redux-oidc";
-import jwt_decode from 'jwt-decode';
 import userManager from "./userManager";
 
-class CallbackPage extends React.Component {
-  render() {
-    console.log("MYPROPS: ", this.props);
+const CallbackPage = ({ dispatch }) => (
+  <CallbackComponent
+    userManager={userManager}
+    successCallback={(user) => dispatch(push('/'))}
+    errorCallback={() => dispatch(push('/')) }
+  >
+    <div>Something...</div>
+  </CallbackComponent>)
 
-    // just redirect to '/' in both cases
-    return (
-      <CallbackComponent
-        userManager={userManager}
-        successCallback={(user) => console.log(jwt_decode(user.access_token))}
-        errorCallback={() => console.log("Error") }
-      >
-        <div>Something...</div>
-      </CallbackComponent>
-    );
-  }
-}
-
-export default connect()(CallbackPage);
+function mapStateToProps(state){
+  return {}
+};
+function mapDispatchToProps(dispatch) {
+  return {
+    dispatch
+  };
+};
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(CallbackPage);
