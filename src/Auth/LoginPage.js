@@ -1,5 +1,6 @@
 import React from "react";
 import userManager from "./userManager";
+import { Button } from 'antd';
 
 class LoginPage extends React.Component {
   onLoginButtonClick(event) {
@@ -10,9 +11,9 @@ class LoginPage extends React.Component {
   render() {
     return (
       <div style={styles.root}>
-        <h3>Welcome to the redux-oidc sample app!</h3>
+        <h3>Welcome to Redux Keycloak Playground </h3>
         <p>Please log in to continue</p>
-        <button onClick={this.onLoginButtonClick}>Login with Google</button>
+        <Button type="primary" onClick={this.onLoginButtonClick}>Keycloak Login</Button>
       </div>
     );
   }

@@ -1,13 +1,9 @@
 import React from 'react';
 import {
-  LandingPage
-} from './components';
-import LoginPage from '../Auth/LoginPage';
-import {
   connect
 } from 'react-redux'
 
-const Authorization = (allowedRoles) => {
+export const Authorization = (allowedRoles) => {
     return function withAuthorization(WrappedComponent){
         function mapStateToProps(state){
           return  {
@@ -21,5 +17,3 @@ const Authorization = (allowedRoles) => {
         return connect(mapStateToProps)(AuthorizedComponent);
     }
 }
-
-export const HomePage = Authorization(["abc"])(LandingPage);

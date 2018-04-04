@@ -4,14 +4,23 @@ import { OidcProvider } from 'redux-oidc';
 import { Route } from 'react-router-dom';
 import { ConnectedRouter } from 'react-router-redux';
 
-import './App.css';
-import { CounterList } from './CounterList/containers';
-import { HomePage } from './HomePage/containers';
-import LoginPage from './Auth/LoginPage';
-import CallbackPage from './Auth/CallbackPage';
+import { Authorization } from './Auth/Authorization';
 import store, { history } from './store';
 import userManager from './Auth/userManager';
 
+import { CounterList } from './CounterList/containers';
+import { LandingPage } from './HomePage/components';
+import LoginPage from './Auth/LoginPage';
+import CallbackPage from './Auth/CallbackPage';
+
+import './App.css';
+import { Layout} from 'antd';
+import NavHeader from './common/NavHeader';
+
+
+const adminAuthorized = Authorization(["abc"]);
+
+const { Content } = Layout;
 
 class App extends Component {
   render() {
@@ -19,17 +28,22 @@ class App extends Component {
       <Provider store={store}>
         <OidcProvider store={store} userManager={userManager}>
             <ConnectedRouter history={history} >
-              <div className="App">
-                <Route exact path='/' component={HomePage} />
-                <Route exact path='/login' component={LoginPage} />
-                <Route exact path='/counter' component={CounterList} />
-                <Route exact path='/callback' component={CallbackPage} />
-              </div>
+              <Layout>
+                <NavHeader />
+                <Layout>
+                  <Content style={{ background: '#fff', padding: 24, margin: 0, minHeight: 280 }}>
+                    <Route exact path='/' component={ adminAuthorized(LandingPage) } />
+                    <Route exact path='/counter' component={ adminAuthorized(CounterList) } />
+                    <Route exact path='/login' component={LoginPage} />
+                    <Route exact path='/callback' component={CallbackPage} />
+                    </Content>
+                </Layout>
+              </Layout>
             </ConnectedRouter>
         </OidcProvider>
       </Provider>
     );
   }
-}
+};
 
 export default App;

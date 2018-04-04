@@ -1,17 +1,19 @@
 import React from 'react';
-
+import { Card, Button } from 'antd';
 const Counter = ({
   increment,
   decrement,
   remove,
   value
 }) => (
-  <li>
+  <Card style={{ width: 350 }}>
     <h1>{value}</h1>
-    <button onClick={increment}>Increment</button>
-    <button onClick={decrement}>Decrement</button>
-    <button onClick={remove}>Delete</button>
-  </li>
+    <Button.Group>
+      <Button onClick={increment}>Increment</Button>
+      <Button onClick={decrement}>Decrement</Button>
+      <Button type="danger" onClick={remove}>Delete</Button>
+    </Button.Group>
+  </Card>
 );
 
 export const CounterListComponenent = ({
@@ -32,6 +34,6 @@ export const CounterListComponenent = ({
             remove = {() => onDelete(index)}
            /> )}
       </ul>
-      <button onClick={() => onAdd()}>Add counter</button>
+      <Button type="primary" onClick={() => onAdd()}>Add counter</Button>
     </div>
 );
