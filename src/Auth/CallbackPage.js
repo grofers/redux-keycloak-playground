@@ -3,25 +3,28 @@ import { connect } from "react-redux";
 import { push } from "react-router-redux";
 import { CallbackComponent } from "redux-oidc";
 import userManager from "./userManager";
+import { message } from "antd";
 
+const success = (user, dispatch) => {
+  message.success("Welcome " + user.profile.name);
+  dispatch(push("/"));
+};
 const CallbackPage = ({ dispatch }) => (
   <CallbackComponent
     userManager={userManager}
-    successCallback={(user) => dispatch(push('/'))}
-    errorCallback={() => dispatch(push('/')) }
+    successCallback={user => success(user, dispatch)}
+    errorCallback={() => dispatch(push("/"))}
   >
     <div>Something...</div>
-  </CallbackComponent>)
+  </CallbackComponent>
+);
 
-function mapStateToProps(state){
-  return {}
-};
+function mapStateToProps(state) {
+  return {};
+}
 function mapDispatchToProps(dispatch) {
   return {
     dispatch
   };
-};
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(CallbackPage);
+}
+export default connect(mapStateToProps, mapDispatchToProps)(CallbackPage);

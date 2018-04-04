@@ -3,33 +3,32 @@ import {
   removeCounter,
   incrementCounter,
   decrementCounter
-} from './actions';
+} from "./actions";
 
-import { CounterListComponenent } from './components';
-import { connect } from 'react-redux'
+import { CounterListComponenent } from "./components";
+import { connect } from "react-redux";
 
-const mapStateToProps = (state) => ({
-    counters : state.counters
-  });
+const mapStateToProps = state => ({
+  counters: state.counters
+});
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
-    onIncrement: (index) => {
+    onIncrement: index => {
       dispatch(incrementCounter(index));
     },
-    onDecrement: (index) => {
+    onDecrement: index => {
       dispatch(decrementCounter(index));
     },
-    onDelete: (index) => {
+    onDelete: index => {
       dispatch(removeCounter(index));
     },
     onAdd: () => {
       dispatch(addCounter());
-    },
+    }
   };
 };
 
-export const CounterList = connect(
-    mapStateToProps,
-    mapDispatchToProps,
-  )(CounterListComponenent);
+export const CounterList = connect(mapStateToProps, mapDispatchToProps)(
+  CounterListComponenent
+);
